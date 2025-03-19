@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/evaluate">Evaluate Model</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Model Evaluation</h1>
+        <div class="evaluation-container">
+            <p><strong>Mean Absolute Error (MAE):</strong> {{ mae }}</p>
+            <p><strong>Mean Squared Error (MSE):</strong> {{ mse }}</p>
+            <p><strong>R-squared (R²):</strong> {{ r2 }}</p>
+            <p><strong>Percentage Accuracy:</strong> {{ accuracy }}%</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 AI Carbon Driven System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

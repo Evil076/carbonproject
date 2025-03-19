@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Carbon Driven System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme-toggle.js') }}" defer></script>
+
+</head>
+<body>
+    <header>
+    
+
+        
+
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                {% if session['username'] %}
+                    <li><a href="/predict">Predict</a></li>
+                    <li><a href="/analyze">Analyze</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                {% endif %}
+            </ul>
+            <button id="theme-toggle">Toggle Theme</button>
+        </nav>
+    </header>
+    <main>
+        <h1>AI Carbon Driven System</h1>
+        <div class="description-container">
+            <p>
+                {{ description }}
+            </p>
+        </div>
+        {% if session['username'] %}
+            <section>
+                <h2>Welcome, {{ session['username'] }}</h2>
+            </section>
+            <section>
+                <h2>Predict Carbon Level</h2>
+                <form action="/predict" method="post">
+                    <label for="feature1">Feature 1:</label>
+                    <input type="number" id="feature1" name="feature1" placeholder="Enter value for Feature 1 (e.g., Temperature)" max="20" required><br><br>
+                    <label for="feature2">Feature 2:</label>
+                    <input type="number" id="feature2" name="feature2" placeholder="Enter value for Feature 2 (e.g., Humidity)" max="20" required><br><br>
+                    <button type="submit">Predict</button>
+                </form>
+                <h3>{{ prediction_text }}</h3>
+            </section>
+            <section>
+                <h2>Analyze Carbon Levels</h2>
+                <form action="/analyze" method="get">
+                    <button type="submit">Analyze</button>
+                </form>
+                <h3>{{ report_text }}</h3>
+                {% if plot_url %}
+                    <img src="{{ plot_url }}" alt="Carbon Level Analysis Plot">
+                {% endif %}
+                <h3>{{ trend_text }}</h3>
+                <a href="/download_report">Download Report</a>
+            </section>
+            <section>
+                <h2>Share Your Experience</h2>
+                <form action="/comment" method="post">
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" name="comment" rows="4" required></textarea><br><br>
+                    <label for="rating">Rate the System:</label>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="5 stars">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">1 star</label>
+                    </div><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <h3>Average Rating:</h3>
+                <div class="star-rating">
+                    {% set avg_rating_int = avg_rating | int %}
+                    {% set avg_rating_frac = avg_rating - avg_rating_int %}
+                    {% for i in range(1, avg_rating_int + 1) %}
+                        <span class="star filled">★</span>
+                    {% endfor %}
+                    {% if avg_rating_frac > 0 %}
+                        <span class="star half">★</span>
+                    {% endif %}
+                    {% for i in range(avg_rating_int + 2, 6) %}
+                        <span class="star">★</span>
+                    {% endfor %}
+                </div>
+                <h3>Recommendations from Previous Users</h3>
+                <div id="comments">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <p><strong>{{ comment[0] }}</strong></p> <!-- Display username -->
+                            <p>{{ comment[3] }}</p> <!-- Display timestamp -->
+                            <p>{{ comment[1] }}</p> <!-- Display comment text -->
+                            <div class="star-rating">
+                                {% set rating = comment[2] | int %}
+                                {% for i in range(1, rating + 1) %}
+                                    <span class="star filled">★</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <section>
+                <h2>Recommendations from Previous Users</h2>
+                <h3>Average Rating:</h3>
+                <div class="star-rating">
+                    {% set avg_rating_int = avg_rating | int %}
+                    {% set avg_rating_frac = avg_rating - avg_rating_int %}
+                    {% for i in range(1, avg_rating_int + 1) %}
+                        <span class="star filled">★</span>
+                    {% endfor %}
+                    {% if avg_rating_frac > 0 %}
+                        <span class="star half">★</span>
+                    {% endif %}
+                    {% for i in range(avg_rating_int + 2, 6) %}
+                        <span class="star">★</span>
+                    {% endfor %}
+                </div>
+                <div id="comments">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <p><strong>{{ comment[0] }}</strong></p> <!-- Display username -->
+                            <p>{{ comment[3] }}</p> <!-- Display timestamp -->
+                            <p>{{ comment[1] }}</p> <!-- Display comment text -->
+                            <div class="star-rating">
+                                {% set rating = comment[2] | int %}
+                                {% for i in range(1, rating + 1) %}
+                                    <span class="star filled">★</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+        <section>
+            <h2>Model Evaluation</h2>
+            <a href="/evaluate"><button>Evaluate Model</button></a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 AI Carbon Driven System. All rights reserved.</p>
+    </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        h1 {
+            color: #d9534f; /* Bootstrap danger color */
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Access Denied</h1>
+        <p>Log in if you have an account. <a href="/login">Login</a></p>
+        <p>If you don't have an account, please sign up. <a href="/signup">Sign Up</a></p>
+    </main>
+    <footer>
+        <p>&copy; 2025 AI Carbon Driven System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

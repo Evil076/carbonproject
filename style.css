@@ -1,0 +1,234 @@
+/* General styles */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6; /* Improved line height for readability */
+}
+
+.dark-theme {
+  background-color: #333;
+  color: white;
+}
+
+/* Container styles */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 0; /* Increased padding for better spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#theme-toggle {
+  background-color: #fff;
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#theme-toggle:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Main content styles */
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.description-container {
+  background-color: #e7f3fe;
+  border: 1px solid #b3d4fc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form styles */
+form {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="number"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Comment styles */
+.comment {
+  margin-bottom: 20px;
+  padding: 15px; /* Increased padding for better spacing */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+/* Star rating styles */
+.star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 20px;
+  color: #FFD700;
+}
+
+.star.filled {
+  color: #FFD700;
+}
+
+.star.half {
+  color: #FFD700;
+}
+
+/* Button Animations */
+button {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Change to a darker shade */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Heading Animations */
+h1, h2 {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Description Animations */
+p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

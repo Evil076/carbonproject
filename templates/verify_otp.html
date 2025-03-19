@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+                <li><button id="theme-toggle">Toggle Theme</button></li>
+
+
+
+
+
+
+            </ul>
+
+
+        </nav>
+    </header>
+    <main>
+        <h1>Verify OTP</h1>
+        <p>Enter OTP sent to "{{ email }}"</p>
+        <form action="/verify_otp" method="post">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required><br><br>
+            <button type="submit">Verify</button>
+        </form>
+        {% if otp_error %}
+            <p class="error-message">{{ otp_error }}</p> <!-- Updated to use CSS class for styling -->
+        {% endif %}
+        <p id="countdown"></p>
+        <button id="resend-otp" onclick="resendOtp()" disabled>Resend OTP</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 AI Carbon Driven System. All rights reserved.</p>
+    </footer>
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle'); 
+        console.log("Theme toggle button clicked"); // Debugging line
+
+        themeToggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+
+
+
+
+
+    </script>
+
+    <script>
+
+    </script>
+
+    <script>
+        let countdownElement = document.getElementById('countdown');
+        let resendButton = document.getElementById('resend-otp');
+        let countdownTime = 60; // 1 minute countdown
+
+        function startCountdown() {
+            let countdownInterval = setInterval(() => {
+                if (countdownTime <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = '';
+                    resendButton.disabled = false;
+                } else {
+                    countdownElement.textContent = `You can resend OTP in ${countdownTime} seconds.`;
+                    countdownTime--;
+                }
+            }, 1000);
+        }
+
+        function resendOtp() {
+            fetch('/resend_otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                countdownTime = 60;
+                resendButton.disabled = true;
+                startCountdown();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
